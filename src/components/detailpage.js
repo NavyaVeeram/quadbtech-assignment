@@ -10,30 +10,33 @@ function sanitizeHTML(html) {
 function DetailsPage() {
   let { state } = useLocation();
   const [records, setRecords] = useState([state.records]);
+
   return (
-    <>
-      <div className="container w-100">
-        <div>
-          {records && records?.map((list, index) => (
-             <div className="container bg-light p-3 d-flex">
+    <div className="container">
+      {records && records?.map((list, index) => (
+        <div className="card mb-3" key={index}>
+          <div className="row g-0">
+            <div className="col-md-4">
               <div className="image">
-             {list.show.image && list.show.image.medium ? (
-               <img src={list.show.image.medium} alt="Show" style={{ height:'200px',width:'100px',objectFit: 'cover' }} />
-             ) : (
-               <div style={{  backgroundColor: 'lightgray',height:'200px',width:'100px'}}></div>
-             )}
-             </div>
-              <div className="content p-5">
-                <p style={{ fontFamily: 'poppins' }}>
+                {list.show.image && list.show.image.medium ? (
+                  <img src={list.show.image.medium} alt="Show" className="img-fluid w-100" />
+                ) : (
+                  <div style={{ backgroundColor: 'lightgray',  }}></div>
+                )}
+              </div>
+            </div>
+            <div className="col-md-8 text-center">
+        
+                <p className="card-text p-5" style={{ fontFamily: 'poppins',fontSize:'20px' }}>
                   {sanitizeHTML(list.show.summary)}
                 </p>
-              </div>
            
             </div>
-          ))}
+          </div>
         </div>
-      </div>
-    </>
+      ))}
+    </div>
   );
 }
-export default DetailsPage
+
+export default DetailsPage;
